@@ -10,10 +10,23 @@
     
 </head>
 <body>
-    <div>
-        <h1><a href ="{% url 'list' %}"></a><img src="{% static 'img/favicon.png' %}"></h1>
-        {% block content %}
-        {% endblock %}
+    <header class="wrapper">
+        <h1><a href ="{% url 'articles:list' %}"></a><img src="{% static 'img/favicon.png' %}"></h1>
+    <nav>
+        <ul>
+            <li>
+                <form class="logout-link" action="{% url 'accounts:logout' %}" method="post" >
+                    {% csrf_token %}
+                    <button type="submit">LOGOUT</button>
+                </form>
+            </li>
+        </ul>
+    </nav>
+    </header>
+    <div class="wrapper">
+            {% block content %}
+            {% endblock %}
+        
     </div>
 </body>
 </html>
