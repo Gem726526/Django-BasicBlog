@@ -7,19 +7,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Articles</title>
     <link rel="stylesheet" href="{% static 'styles.css' %}">
+    <link rel="icon" type="image/png" href="{% static 'img/favicon.png' %}">
     
 </head>
 <body>
     <header class="wrapper">
-        <h1><a href ="{% url 'articles:list' %}"></a><img src="{% static 'img/favicon.png' %}"></h1>
+        <h1><a href ="{% url 'articles:list' %}">   <img src="{% static 'img/favicon.png' %}">  </a></h1>
     <nav>
         <ul>
-            <li>
-                <form class="logout-link" action="{% url 'accounts:logout' %}" method="post" >
+            {% if user.is_authenticated %}
+             <li>
+                <form class="logout-link"   action="{%url 'accounts:logout' %}"    method="post" >
                     {% csrf_token %}
                     <button type="submit">LOGOUT</button>
                 </form>
-            </li>
+             </li>
+             <li> <a href="{% url 'articles:create' %}" > Create Article </a></li>
+            {% else %}
+            <li> <a href="{% url 'accounts:login' %}" >login </a>   </li>
+            <li> <a href="{% url 'accounts:signup' %}" >Signup </a>   </li>
+            {% endif %}
         </ul>
     </nav>
     </header>
